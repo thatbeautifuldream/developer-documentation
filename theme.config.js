@@ -44,11 +44,11 @@ const theme = {
         <meta name="msapplication-TileColor" content="#000000" />
         <meta
           name="description"
-          content="Website created for the 100xdevs course as a documentation by Milind Mishra"
+          content="This website consists of docs related to the 100xdevs Cohort, which is split up into week wise sessions."
         />
         <meta
           name="description"
-          content="Website created for the 100xdevs course as a documentation by Milind Mishra"
+          content="This website consists of docs related to the 100xdevs Cohort, which is split up into week wise sessions."
         />
         <meta name="author" content="Milind Mishra" />
         <meta
@@ -62,7 +62,7 @@ const theme = {
         <meta property="og:title" content={`${props.title} | 100xdocs`} />
         <meta
           property="og:description"
-          content="Website created for the 100xdevs course as a documentation by Milind Mishra"
+          content="This website consists of docs related to the 100xdevs Cohort, which is split up into week wise sessions."
         />
         <meta
           property="og:image"
