@@ -1,4 +1,11 @@
+# 100xdocs
 
-# JavaScript and React Patterns
+This website is related to the [100xdevs Cohort](https://100xdevs.com/), which is split up into week wise sessions.
 
-This repo includes the public source code for the [course website](https://javascriptpatterns.vercel.app/patterns) related to the [FrontendMasters workshop on JavaScript and React Patterns](https://frontendmasters.com/courses/tour-js-patterns/). Hope you enjoy the course :) 
+- Week 0: Warming Up
+
+The content is purely an initiative by a cohort member [Milind Mishra](https://milindmishra.com) - who is a full stack developer looking to help others learn how to build web apps.
+
+---
+
+The docs covered on this website and in the cohort can guide you as a starting point for building your own web apps. The goal is to help you learn how to build web apps with standard technologies that are relivant for the market.

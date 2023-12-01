@@ -9,6 +9,9 @@
       "layout": "raw"
     }
   },
+  "docs": {
+    "title": "Docs"
+  },
   "contact": {
     "title": "Contact ↗",
     "type": "page",

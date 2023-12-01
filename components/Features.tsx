@@ -1,25 +1,9 @@
-import {
-  LightningBoltIcon,
-  PuzzleIcon,
-  CogIcon,
-} from "@heroicons/react/outline";
+import { FireIcon } from "@heroicons/react/outline";
 
 const features = [
   {
-    name: "Design Patterns",
-    icon: PuzzleIcon,
-  },
-  {
-    name: " React Patterns",
-    icon: () => <img src="/react.svg" height="24" width="24" />,
-  },
-  {
-    name: "Rendering Patterns",
-    icon: CogIcon,
-  },
-  {
-    name: "Performance Patterns",
-    icon: LightningBoltIcon,
+    name: "Week 0 - Warming Up",
+    icon: FireIcon,
   },
 ];
 
