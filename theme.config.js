@@ -51,7 +51,10 @@ const theme = {
           content="Website created for the 100xdevs course as a documentation by Milind Mishra"
         />
         <meta name="author" content="Milind Mishra" />
-        <meta property="og:url" content="https://100xdocs.vercel.app/docs" />
+        <meta
+          property="og:url"
+          content="https://100xdocs.vercel.app/ogimage.png"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:image:width" content="1200" />
@@ -63,7 +66,7 @@ const theme = {
         />
         <meta
           property="og:image"
-          content="https://100xdocs.vercel.app/ogimage1.png"
+          content="https://100xdocs.vercel.app/ogimage.png"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@milindstwt" />

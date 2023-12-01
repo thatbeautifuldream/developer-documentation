@@ -2,7 +2,7 @@ import { FireIcon } from "@heroicons/react/outline";
 
 const features = [
   {
-    name: "Week 0 - Warming Up",
+    name: "Week 0: Warming Up",
     icon: FireIcon,
   },
 ];

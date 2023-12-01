@@ -1,6 +1,6 @@
 # 100xdocs
 
-This website is related to the [100xdevs Cohort](https://100xdevs.com/), which is split up into week wise sessions.
+This website consists of docs related to the [100xdevs Cohort](https://100xdevs.com/), which is split up into week wise sessions.
 
 - Week 0: Warming Up
 
