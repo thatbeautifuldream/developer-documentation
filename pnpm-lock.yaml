@@ -14,6 +14,9 @@ dependencies:
   '@vercel/analytics':
     specifier: ^1.1.1
     version: 1.1.1
+  classnames:
+    specifier: ^2.3.2
+    version: 2.3.2
   next:
     specifier: 12.1.0
     version: 12.1.0(react-dom@17.0.2)(react@17.0.2)

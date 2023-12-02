@@ -1,3 +1,5 @@
+import StatusBadge from "./components/StatusBadge";
+
 const theme = {
   titleSuffix: " | 100xdocs",
   search: true,
@@ -9,15 +11,16 @@ const theme = {
   projectLink: "https://github.com/thatbeautifuldream/100xdocs",
   logo: () => (
     <>
-      <img
+      {/* <img
         src="/typescript.svg"
         height="25"
         width="25"
         style={{ marginRight: "1em" }}
-      />
+      /> */}
       <h1>
         100xdocs <span style={{ opacity: 0.2 }}></span>
       </h1>
+      <StatusBadge status="WIP" />
     </>
   ),
   head: function Head(props) {
