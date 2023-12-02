@@ -2,7 +2,35 @@ import { FireIcon } from "@heroicons/react/outline";
 
 const features = [
   {
-    name: "Week 0: Warming Up",
+    name: "Mern Stack",
+    icon: FireIcon,
+  },
+  {
+    name: "Devops Basics",
+    icon: FireIcon,
+  },
+  {
+    name: "Open Source (GSOC)",
+    icon: FireIcon,
+  },
+  {
+    name: "Portfolio Projects",
+    icon: FireIcon,
+  },
+  {
+    name: "System Design",
+    icon: FireIcon,
+  },
+  {
+    name: "Advanced Backend",
+    icon: FireIcon,
+  },
+  {
+    name: "Advanced Devops",
+    icon: FireIcon,
+  },
+  {
+    name: "Open Source (Real Companies)",
     icon: FireIcon,
   },
 ];
