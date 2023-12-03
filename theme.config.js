@@ -17,10 +17,10 @@ const theme = {
         width="25"
         style={{ marginRight: "1em" }}
       /> */}
+      <StatusBadge status="TS" />
       <h1>
         100xdocs <span style={{ opacity: 0.2 }}></span>
       </h1>
-      <StatusBadge status="WIP" />
     </>
   ),
   head: function Head(props) {
