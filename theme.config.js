@@ -1,4 +1,4 @@
-import StatusBadge from "./components/StatusBadge";
+import Badge from "./components/Badge";
 
 const theme = {
   titleSuffix: " | 100xdocs",
@@ -17,7 +17,7 @@ const theme = {
         width="25"
         style={{ marginRight: "1em" }}
       /> */}
-      <StatusBadge status="TS" />
+      <Badge text="TS" />
       <h1>
         100xdocs <span style={{ opacity: 0.2 }}></span>
       </h1>
