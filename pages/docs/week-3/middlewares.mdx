@@ -342,23 +342,46 @@ const express = require("express");
 
 const app = express();
 
-let count = 0;
-let totalTime = 0;
-function countRequest(req, res, next) {
-  count++;
-  console.log(`Total requests : ${count}`);
-  next();
-}
-
 function timeMiddleware(req, res, next) {
   const start = Date.now();
   res.on("finish", () => {
     const end = Date.now();
-    totalTime += end - start;
-    console.log(`Average time : ${totalTime / count}`);
+    console.log(`Time taken : ${end - start} ms`);
   });
   next();
 }
 
-app.use(countRequest, timeMiddleware);
+app.use(timeMiddleware);
+```
+
+### Why do we need input validations?
+
+What if user sends an unexpected input to our server? Lets say the user sends a string instead of a number for kidneyId. Our server will crash. We need to handle these cases and send a proper response to the user.
+
+```javascript
+const express = require("express");
+
+const app = express();
+
+app.post("/health-checkup", function (req, res) {
+  // do something with kidney here
+  const kidneys = req.body.kidneys;
+  const kidneyLength = kidneys.length;
+
+  res.send(`You have ${kidneyLength} kidneys`);
+});
+```
+
+### Global catches
+
+This is the middleware that gets executed when an error occurs in the server.
+AKA, Error Handling Middleware : Special type of function in Express that has four arguments `(err, req, res, next)`.
+Express recognizes the error handling function by the fact that it has four arguments instead of three.
+
+```javascript
+app.use(function (err, req, res, next) {
+  console.error(err);
+  console.error(err.stack);
+  res.status(500).send("Internal server error!");
+});
 ```
