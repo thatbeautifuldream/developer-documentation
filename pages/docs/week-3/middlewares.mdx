@@ -1,0 +1,294 @@
+import Callout from "../../../components/Callout";
+
+# Middlewares
+
+Lets understand the concept of middlewares with an example of `Hospital Management System` lets say during the COVID pandemic.
+Before we reach the doctor we have to undergo a series of formality and checks like aadhar, insurance checks, medical history, temperature check, etc.
+These series of requests are waiting in the callback queue to be processed by the server.
+Now lets talk in terms of code and see how we can implement this.
+
+```javascript
+const express = require("express");
+
+const app = express();
+
+app.get("/health-checkup", function (req, res) {
+  // health checkups here
+  // if they pass then you proceed
+  res.send("You are healthy");
+});
+```
+
+### Common Questions
+
+1. Auth checks? (does the user have enough funds to visit the doc?)
+2. Ensure input by the user is valid (BP/Blood tests)
+
+### Add more constraints to our health checkup route
+
+1. User needs to send a kidneyId as a query param which should be a number from 1-2 (humans only has 2 kidneys)
+2. User should send a username and password in headers
+
+```javascript
+app.get("/health-checkup", function (req, res) {
+  // health checkups here
+  const kidneyId = req.query.kidneyId;
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (username != "admin" && password != "root") {
+    // 403 forbidden
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    // early return as we dont want to execute the rest of the code
+    // since the user authentication failed
+    return;
+  }
+
+  if (kidneyId != 1 && kidneyId != 2) {
+    // 411 Length required
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  // do something with kidney here
+
+  // if they pass then you proceed
+  res.send("You are healthy");
+});
+```
+
+<Callout type="idea">
+  <p>
+    <strong>NOTE</strong> : We are using{" "}
+    <code>if (username != "admin" && password != "root")</code> to validate if
+    the user is not the admin if yes then we are returning a <code>403</code>{" "}
+    status code. Another patter is to negate the condition and return early.
+    Like <code>if (!(username == "admin" || password == "root"))</code> which is
+    same as above condition just more readable.
+  </p>
+</Callout>
+
+- What if we are asked to add a new route that does kidney replacement and the inputs need to be same as the health checkup route?
+
+> Ugly Solution : create new route and repeat the same code
+
+```javascript
+app.get("/health-checkup", function (req, res) {
+  // health checkups here
+  const kidneyId = req.query.kidneyId;
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (username != "admin" && password != "root") {
+    // 403 forbidden
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    // early return as we dont want to execute the rest of the code
+    // since the user authentication failed
+    return;
+  }
+
+  if (kidneyId != 1 && kidneyId != 2) {
+    // 411 Length required
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  // do something with kidney here
+
+  // if they pass then you proceed
+  res.send("You are healthy");
+});
+
+app.get("/replace-kidney", function (req, res) {
+  // health checkups here
+  const kidneyId = req.query.kidneyId;
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (username != "admin" && password != "root") {
+    // 403 forbidden
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    // early return as we dont want to execute the rest of the code
+    // since the user authentication failed
+    return;
+  }
+
+  if (kidneyId != 1 && kidneyId != 2) {
+    // 411 Length required
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  // kidney replacement logic here
+
+  // if they pass then you proceed
+  res.send("Your kidney has been replaced, you are healthy now");
+});
+```
+
+> Slightly Better Solution : create helper function and call it in both routes
+
+```javascript
+function usernameValidator(username, password) {
+  if (username != "admin" && password != "root") {
+    return false;
+  }
+  return true;
+}
+
+function kidneyValidator(kidneyId) {
+  if (kidneyId != 1 && kidneyId != 2) {
+    return false;
+  }
+  return true;
+}
+
+app.get("/health-checkup", function (req, res) {
+  // health checkups here
+  const kidneyId = req.query.kidneyId;
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (!usernameValidator(username, password)) {
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    return;
+  }
+
+  if (!kidneyValidator(kidneyId)) {
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  // do something with kidney here
+
+  res.send("You are healthy");
+});
+
+app.get("/replace-kidney", function (req, res) {
+  // health checkups here
+  const kidneyId = req.query.kidneyId;
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (!usernameValidator(username, password)) {
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    return;
+  }
+
+  if (!kidneyValidator(kidneyId)) {
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  // kidney replacement logic here
+
+  res.send("Your kidney has been replaced, you are healthy now");
+});
+```
+
+> Best Solution : create a middleware and use it in both routes
+
+```javascript
+function userMiddleware(req, res, next) {
+  const username = req.headers.username;
+  const password = req.headers.password;
+
+  if (username != "admin" && password != "root") {
+    res.status(403).json({
+      message: "Invalid credentials",
+    });
+    return;
+  }
+  next();
+}
+
+function kidneyMiddleware(req, res, next) {
+  const kidneyId = req.query.kidneyId;
+
+  if (kidneyId != 1 && kidneyId != 2) {
+    res.status(411).json({
+      message: "Wrong inputs",
+    });
+    return;
+  }
+  next();
+}
+
+app.get(
+  "/health-checkup",
+  userMiddleware,
+  kidneyMiddleware,
+  function (req, res) {
+    // do something with kidney here
+
+    res.send("You are healthy");
+  }
+);
+
+app.get(
+  "/replace-kidney",
+  userMiddleware,
+  kidneyMiddleware,
+  function (req, res) {
+    // kidney replacement logic here
+
+    res.send("Your kidney has been replaced, you are healthy now");
+  }
+);
+
+// can consume the middleware in other routes as well
+app.get("/heart-check", userMiddleware, function (req, res) {
+  // do something with user here
+  res.send("Your heart is healthy");
+});
+```
+
+<Callout type="warning">
+  <p>
+    <strong>NOTE</strong> : The order of the middlewares matter. If you put the
+    <code>userMiddleware</code> after the <code>kidneyMiddleware</code> then the{" "}
+    <code>kidneyMiddleware</code> will not be executed. Well the code here is quite
+    dumb but you get the point.
+  </p>
+</Callout>
+
+### app.use
+
+`app.use` is a special function that can be used to apply a middleware to all the routes.
+
+```javascript
+// a middleware that helps us to parse the body of the request as a json
+// generally used to parse the body of POST requests
+app.use(express.json());
+// a middleware that helps us to parse the body of the request as a url encoded string
+app.use(express.urlencoded({ extended: true }));
+
+// add more middlewares to all the routes
+app.use(userMiddleware);
+app.use(kidneyMiddleware);
+```
+
+- this will apply the middleware to all the routes
+
+### app.use with path
+
+We can add a path to the `app.use` function to apply the middleware to only those routes that match the path. Lets apply the middleware to all the routes that start with `/health-checkup`
+
+```javascript
+app.use("/health-checkup", userMiddleware);
+```
