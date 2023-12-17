@@ -292,3 +292,50 @@ We can add a path to the `app.use` function to apply the middleware to only thos
 ```javascript
 app.use("/health-checkup", userMiddleware);
 ```
+
+### Assignments
+
+> 1. Count the number of requests
+
+```javascript
+const express = require("express");
+
+const app = express();
+
+let count = 0;
+function countRequest(req, res, next) {
+  count++;
+  console.log(`Total requests : ${count}`);
+  next();
+}
+
+app.use(countRequest);
+```
+
+> 2. Find the average time your server is taking to handle requests
+
+```javascript
+const express = require("express");
+
+const app = express();
+
+let count = 0;
+let totalTime = 0;
+function countRequest(req, res, next) {
+  count++;
+  console.log(`Total requests : ${count}`);
+  next();
+}
+
+function timeMiddleware(req, res, next) {
+  const start = Date.now();
+  res.on("finish", () => {
+    const end = Date.now();
+    totalTime += end - start;
+    console.log(`Average time : ${totalTime / count}`);
+  });
+  next();
+}
+
+app.use(countRequest, timeMiddleware);
+```

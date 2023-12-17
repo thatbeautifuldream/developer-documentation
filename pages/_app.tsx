@@ -1,7 +1,6 @@
 import "../styles.css";
 import "nextra-theme-docs/style.css";
 import "../custom.css";
-import { Analytics } from "@vercel/analytics/react";
 import { SSRProvider } from "@react-aria/ssr";
 
 // Shim requestIdleCallback in Safari => disabled for now due to build errors
@@ -16,7 +15,6 @@ export default function Nextra({ Component, pageProps }) {
   return getLayout(
     <SSRProvider>
       <Component {...pageProps} />
-      <Analytics />
     </SSRProvider>
   );
 }
