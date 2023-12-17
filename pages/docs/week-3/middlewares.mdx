@@ -312,6 +312,29 @@ function countRequest(req, res, next) {
 app.use(countRequest);
 ```
 
+<Callout type="info">
+  Lets also make a `countVisits` middleware that counts the number of times a
+  user has visited the website on specific route.
+</Callout>
+
+```javascript
+let page_visits = {};
+let visits = function (req, res, next) {
+  let counter = page_visits[req.originalUrl];
+  if (counter || counter === 0) {
+    page_visits[req.originalUrl] = counter + 1;
+  } else {
+    page_visits[req.originalUrl] = 1;
+  }
+  console.log(req.originalUrl, counter);
+  next();
+};
+
+app.use(visits);
+```
+
+Source : [Stackoverflow](https://stackoverflow.com/a/54103439)
+
 > 2. Find the average time your server is taking to handle requests
 
 ```javascript
