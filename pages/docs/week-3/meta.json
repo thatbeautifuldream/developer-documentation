@@ -1,3 +1,5 @@
 {
-  "middlewares": "Middlewares"
+  "middlewares": "Middlewares",
+  "input-validations": "Input Validations",
+  "fetch-api": "Fetch API"
 }

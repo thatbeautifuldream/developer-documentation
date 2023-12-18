@@ -1,0 +1,69 @@
+# Fetch API
+
+Until now we have seen request being made either from the browser or from the postman. Well there are lots of ways to make these requests.
+
+Some of them are : `cURL` known as client URL, `XMLHttpRequest` known as XHR, `Fetch API` and many more.
+
+In this section we will be looking at `Fetch API` which is a modern way of making requests.
+
+## Fetch API
+
+For example we will be creating a HTML page where you can:
+
+- Names of 10 people
+- Make sure that the names we get are from an API [`https://fakerapi.it/api/v1/persons`](https://fakerapi.it/api/v1/persons)
+
+```jsx
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id="container">
+  </div>
+  <button onclick="getAnimals()">get animals</button>
+  <script>
+    function getAnimals() {
+      fetch("https://fakerapi.it/api/v1/persons")
+        .then(async function(response) {
+          const jsonData = await response.json();
+          document.getElementById("container").innerHTML = JSON.stringify(jsonData.data);
+        })
+    }
+  </script>
+</body>
+
+</html>
+```
+
+Here from the above example we can see that:
+
+- we are making a request to the API and then we are getting the response and then we are converting the response to JSON
+
+```javascript {2,3,4,5}
+function getAnimals() {
+  fetch("https://fakerapi.it/api/v1/persons").then(async function (response) {
+    const jsonData = await response.json();
+    // displaying the data in the HTML page
+  });
+}
+```
+
+- then we are displaying the data in the HTML page.
+
+```javascript {4,5,6}
+function getAnimals() {
+  fetch("https://fakerapi.it/api/v1/persons").then(async function (response) {
+    const jsonData = await response.json();
+    document.getElementById("container").innerHTML = JSON.stringify(
+      jsonData.data
+    );
+  });
+}
+```
