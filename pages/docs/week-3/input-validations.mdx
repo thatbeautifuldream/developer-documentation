@@ -63,3 +63,40 @@ app.post("/health-checkup", (req, res) => {
   res.status(200).send(`You have ${kidneyLength} kidneys`);
 });
 ```
+
+## Basic Usage
+
+Creating a simple string schema.
+
+```javascript
+import { z } from "zod";
+
+// creating a schema for strings
+const mySchema = z.string();
+
+// parsing
+mySchema.parse("tuna"); // => "tuna"
+mySchema.parse(12); // => throws ZodError
+
+// "safe" parsing (doesn't throw error if validation fails)
+mySchema.safeParse("tuna"); // => { success: true; data: "tuna" }
+mySchema.safeParse(12); // => { success: false; error: ZodError }
+```
+
+Creating a object schema.
+
+```javascript
+import { z } from "zod";
+
+const User = z.object({
+  username: z.string(),
+});
+
+User.parse({ username: "Ludwig" });
+
+// extract the inferred type
+type User = z.infer<typeof User>;
+// { username: string }
+```
+
+> Zod documentation is really great and you can find more examples [here](https://zod.dev/?id=basic-usage)
