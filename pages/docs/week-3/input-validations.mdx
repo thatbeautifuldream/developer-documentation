@@ -1,1 +1,65 @@
-# Input Validations using Zod
+# Input Validations
+
+Generally when we gather inputs from the users, its a good practice to validate the inputs before processing them. This is where input validation comes into picture. In this section we will see how to validate the inputs using the `zod` library latter in the docs.
+
+But what really happens when user sends faulty inputs? Well, the server will throw an error. But we need to handle the error and send a proper response to the user. We will see how to do that in the next section. But first lets see an example of the faulty behaviour.
+
+```javascript
+const express = require("express");
+
+const app = express();
+
+app.post("/health-checkup", (req, res) => {
+  // do something with kidney here
+  const kidneys = req.body.kidneys;
+  const kidneyLength = kidneys.length;
+
+  res.send(`You have ${kidneyLength} kidneys`);
+});
+
+app.listen(3000, () => {
+  console.log("Server is listening on port 3000");
+});
+```
+
+How can we do better input validation? Well we can pass manual checks to the `kidneyId`s and `kidneyLength` to make sure that they are valid. But this is not a good practice.
+
+```javascript
+if (kidneyId != 1 && kidneyId != 2) {
+  return false;
+}
+```
+
+But this approach is hard to scale, and it is not a good practice if we expect complex inputs. So we will use the `zod` library to validate the inputs.
+
+## Zod
+
+[Zod](https://zod.dev/) is a `TypeScript-first schema validation with static type inference`. Sounds complecated? Well lets just focus on `schema validation` for now.
+
+Lets understand better with an example.
+
+```javascript {10,16-20}
+const express = require("express");
+const z = require("zod");
+
+const app = express();
+
+// add middleware to parse the request body
+app.use(express.json());
+
+// defining the schema for the kidneyId that will have a safeParse method to validate the input
+const kidneySchema = z.literal("1").or(z.literal("2"));
+
+app.post("/health-checkup", (req, res) => {
+  // do something with kidney here
+  const kidneyId = req.body.kidneyId;
+  // the validation will return an object with a boolean `success` and `data` property
+  const validation = kidneySchema.safeParse(kidneyId);
+  if (!validation.success) {
+    // if the validation fails, we will send a 400 response
+    return res.status(400).send(validation.error);
+  }
+  // if the validation succeeds, we will send a 200 response
+  res.status(200).send(`You have ${kidneyLength} kidneys`);
+});
+```
