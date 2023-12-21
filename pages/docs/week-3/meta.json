@@ -1,5 +1,6 @@
 {
   "middlewares": "Middlewares",
   "input-validations": "Input Validations",
-  "fetch-api": "Fetch API"
+  "fetch-api": "Fetch API",
+  "authentication": "Authentication"
 }

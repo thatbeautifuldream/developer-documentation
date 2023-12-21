@@ -1,0 +1,62 @@
+# Authentication
+
+By now anyone can send requests to your backend, they can just go to postman and send a request.
+How do you ensure that this user has access to a certain resource?
+
+Dumb way - Ask user to send `username` and `password` in all requests as headers, quite combersome.
+
+Better way - Use `JWT` (JSON Web Token) to authenticate users.
+
+> Simple assignment for now to create a login route that accepts a request and lets you sign in if you have the user registered in your backend.
+
+```javascript
+const express = require("express");
+const app = express();
+
+// add json middleware to parse json requests
+app.use(express.json());
+
+// create a user object
+const USERS = [
+  {
+    username: "harkirat",
+    password: "sonam-bajwa?",
+  },
+  {
+    username: "milind",
+    password: "4crore-chaiye!!",
+  },
+  {
+    username: "shubham",
+    password: "gyan-do",
+  },
+];
+
+// create a login route
+app.post("/login", (req, res) => {
+  // get username and password from request body
+  const { username, password } = req.body;
+
+  // check if user exists
+  const user = USERS.find((user) => user.username === username);
+
+  // if user does not exist
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  // if password does not match
+  if (user.password !== password) {
+    return res.status(400).json({ message: "Password does not match" });
+  }
+
+  // if everything is fine, send a success message
+  res.json({ message: "Login successful" });
+});
+```
+
+## JWT (JSON Web Token)
+
+JWT is a standard for securely transmitting information between parties as a JSON object. It is a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.
+
+Lets see what the library page says about it. [jwt.io](https://jwt.io/introduction/)
