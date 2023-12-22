@@ -1,20 +1,29 @@
+import Head from "next/head";
+import { SSRProvider } from "@react-aria/ssr";
 import "../styles.css";
 import "nextra-theme-docs/style.css";
 import "../custom.css";
-import { SSRProvider } from "@react-aria/ssr";
-
-// Shim requestIdleCallback in Safari => disabled for now due to build errors
-// if (typeof window !== "undefined" && !("requestIdleCallback" in window)) {
-//   window.requestIdleCallback = (fn) => setTimeout(fn, 1);
-//   window.cancelIdleCallback = (e) => clearTimeout(e);
-// }
 
 export default function Nextra({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
-  return getLayout(
+  return (
     <SSRProvider>
-      <Component {...pageProps} />
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        ></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+          `}
+        </script>
+      </Head>
+      {getLayout(<Component {...pageProps} />)}
     </SSRProvider>
   );
 }
