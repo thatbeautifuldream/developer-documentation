@@ -20,3 +20,39 @@ Lets jot down some important points about DOM:
 When you create a script, weather it is inline or external, the browser will automatically create a `document object` for you. The `document` or the `window` object is the root node of the DOM tree. It represents the web page loaded into the current browser window or tab. The document object provides access to all elements in the DOM tree makes it easy for manipulation of all elements.
 
 The DOM was designed to be independent of any particular programming language, making the structural representation of the document available from a single, consistent API. Though, the DOM is not a part of the JavaScript language, it is made available through the `Document Object Model API` exposed by the `browser runtime environment`.
+
+Lets look at an example of accessing the DOM:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM</title>
+    <script>
+      // run this function when DOM is loaded
+      window.onload = function () {
+        console.log(document);
+        const heading = document.createElement("h1");
+        const headingText = document.createTextNode("DOM");
+        heading.appendChild(headingText);
+        document.body.appendChild(heading);
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
+```
+
+As you might have noticed the document log spits the whole html of the page in the console. The `document` object is the root node of the DOM tree. It represents the web page loaded into the current browser window or tab. The document object provides access to all elements in the DOM tree makes it easy for manipulation of all elements.
+It represents the web page using series of objects, root object being `document` object which in turn houses other objects like `forms`, `links`, `images` etc. These objects are called `nodes`.
+
+## DOM Tree
+
+```
+graph LR
+A[Document] --> B[html]
+B --> C[head]
+B --> D[body]
+C --> E[title]
+D --> F[h1]
+```
