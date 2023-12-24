@@ -1,0 +1,19 @@
+# Debouncing and Throttling
+
+## Debouncing
+
+Debouncing is a technique to limit the rate at which a function can fire. When you debounce a function, you prevent it from being called multiple times.
+
+```js
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
+  };
+}
+```

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { SSRProvider } from "@react-aria/ssr";
 import "../styles.css";
 import "nextra-theme-docs/style.css";
@@ -10,18 +11,18 @@ export default function Nextra({ Component, pageProps }) {
   return (
     <SSRProvider>
       <Head>
-        <script
+        <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-        ></script>
-        <script>
+        />
+        <Script strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
           `}
-        </script>
+        </Script>
       </Head>
       {getLayout(<Component {...pageProps} />)}
     </SSRProvider>
