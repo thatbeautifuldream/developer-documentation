@@ -12,10 +12,12 @@
   "docs": {
     "title": "Docs"
   },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/milindstwt",
-    "newWindow": true
+  "privacy-policy": {
+    "title": "Privacy",
+    "hidden": true
+  },
+  "terms-of-service": {
+    "title": "TOS",
+    "hidden": true
   }
 }
