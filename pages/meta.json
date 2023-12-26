@@ -12,6 +12,9 @@
   "docs": {
     "title": "Docs"
   },
+  "assignments": {
+    "title": "Assignments"
+  },
   "privacy-policy": {
     "title": "Privacy",
     "hidden": true
