@@ -17,6 +17,9 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
+  lru-cache:
+    specifier: ^10.1.0
+    version: 10.1.0
   next:
     specifier: 12.1.0
     version: 12.1.0(react-dom@17.0.2)(react@17.0.2)
@@ -32,6 +35,9 @@ dependencies:
   react-dom:
     specifier: 17.0.2
     version: 17.0.2(react@17.0.2)
+  uuid:
+    specifier: ^9.0.1
+    version: 9.0.1
 
 devDependencies:
   '@types/node':
@@ -1259,6 +1265,11 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lru-cache@10.1.0:
+    resolution: {integrity: sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==}
+    engines: {node: 14 || >=16.14}
     dev: false
 
   /lru-cache@4.1.5:
