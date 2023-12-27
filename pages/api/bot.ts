@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    await limiter.check(res, 3, "CACHE_TOKEN"); // 10 requests per minute
+    await limiter.check(res, 5, "CACHE_TOKEN");
     const { prompt } = req.body;
     const model = new ChatGoogleGenerativeAI({
       modelName: "gemini-pro",
