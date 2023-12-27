@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "1.0.5",
+    "@heroicons/react": "^2.1.1",
+    "@langchain/google-genai": "^0.0.5",
     "@react-aria/ssr": "3.1.2",
-    "@theguild/remark-mermaid": "^0.0.5",
     "classnames": "^2.3.2",
     "next": "12.1.0",
     "nextra": "2.0.0-alpha.50",

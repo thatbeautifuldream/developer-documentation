@@ -1,9 +1,11 @@
 import React from "react";
-import LightBulbIcon from "@heroicons/react/solid/LightBulbIcon";
-import WarningIcon from "@heroicons/react/solid/ExclamationIcon";
-import ErrorIcon from "@heroicons/react/solid/ExclamationCircleIcon";
-import InformationCircleIcon from "@heroicons/react/solid/InformationCircleIcon";
-import { CheckCircleIcon } from "@heroicons/react/solid";
+import {
+  CheckCircleIcon,
+  LightBulbIcon,
+  InformationCircleIcon,
+  ExclamationTriangleIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/solid";
 
 const themes = {
   info: {
@@ -19,12 +21,12 @@ const themes = {
   error: {
     classes:
       "bg-red-200 text-red-900 dark:text-red-200 dark:bg-red-600 dark:bg-opacity-30",
-    icon: <ErrorIcon className="w-5 h-5 mt-1" />,
+    icon: <ExclamationCircleIcon className="w-5 h-5 mt-1" />,
   },
   default: {
     classes:
       "bg-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-200 dark:bg-opacity-20",
-    icon: <WarningIcon className="w-5 h-5 mt-1" />,
+    icon: <ExclamationTriangleIcon className="w-5 h-5 mt-1" />,
   },
   green: {
     classes:
