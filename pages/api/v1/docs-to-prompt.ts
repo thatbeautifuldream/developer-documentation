@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { v4 as uuidv4 } from "uuid";
-import rateLimit from "../../utils/rate-limit";
+import rateLimit from "../../../utils/rate-limit";
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -14,14 +12,10 @@ export default async function handler(
 ) {
   try {
     await limiter.check(res, 5, "CACHE_TOKEN");
-    const { prompt } = req.body;
-    const model = new ChatGoogleGenerativeAI({
-      modelName: "gemini-pro",
-      maxOutputTokens: 2048,
-    });
-    const response = await model.invoke([["human", prompt]]);
+    const { url } = req.body;
+    const urlResponse = await fetch(url);
+    const response = await urlResponse.text();
     res.status(200).json({
-      id: uuidv4(),
       response,
     });
   } catch {
