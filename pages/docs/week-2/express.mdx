@@ -1,0 +1,66 @@
+---
+title: Express Basics
+---
+
+# Introduction to Express
+
+In this class, we covered fundamental concepts related to the HTTP protocol, status codes, and an introduction to the Express framework.
+
+## HTTP Protocol Basics
+
+HTTP (Hypertext Transfer Protocol) is the foundation of data communication on the World Wide Web. It is a protocol for transmitting hypermedia documents, such as HTML. In the context of web development, there are two primary types of HTTP requests:
+
+- **GET Request**: Used to request data from a specified resource. For example, when you visit a webpage, your browser sends a GET request to the server to retrieve the HTML, CSS, and other assets needed to render the page.
+
+- **POST Request**: Used to submit data to be processed to a specified resource. When you submit a form on a web page, the data is often sent to the server using a POST request.
+
+## Status Codes
+
+Here are some commonly encountered status codes:
+
+- **200 OK**: The request was successful, and the server responded with the requested data.
+  
+- **404 Not Found**: The server could not find the requested resource. This often occurs when a URL is mistyped or the resource has been removed.
+
+- **500 Internal Server Error**: A generic error message returned when an unexpected condition was encountered on the server. This indicates that there is an issue on the server side.
+
+## Express Framework
+
+Express is a minimal and flexible Node.js web application framework that provides a robust set of features to develop web and mobile applications. It simplifies the process of building web servers and handling HTTP requests.
+
+Key features of Express include:
+
+- **Routing**: Express allows you to define routes that map to specific URL patterns. In the provided code, we have routes for the root path ("/"), "/about", and handling both GET and POST requests.
+
+- **Middleware**: Middleware functions are functions that have access to the request object (`req`), the response object (`res`), and the next function in the application’s request-response cycle. The `body-parser` middleware, used in the code, is responsible for parsing incoming JSON requests.
+
+## Code Example
+
+```javascript
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+const port = process.env.PORT || 3005;
+
+app.use(bodyParser.json());
+
+// Handling GET requests
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.get('/about', (req, res) => {
+    res.send('About us');
+});
+
+// Handling POST requests
+app.post('/', (req, res) => {
+    console.log(req.body);
+    res.send('Hello World!');
+});
+
+// Server Listening
+app.listen(port, () => {
+    console.log(`Example app is listening at port ${port}`);
+});
