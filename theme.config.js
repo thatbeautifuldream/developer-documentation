@@ -11,12 +11,6 @@ const theme = {
   projectLink: "https://github.com/thatbeautifuldream/100xdocs",
   logo: () => (
     <>
-      {/* <img
-        src="/typescript.svg"
-        height="25"
-        width="25"
-        style={{ marginRight: "1em" }}
-      /> */}
       <Badge text="TS" />
       <h1>
         100xdocs <span style={{ opacity: 0.2 }}></span>
