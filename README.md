@@ -11,3 +11,8 @@ The docs covered on this website and in the cohort can guide you as a starting p
 ## Contributing
 
 If you are a cohort member and want to contribute to this website, please follow the [contributing guidelines](CONTRIBUTING.md).
+
+
+<a href="https://github.com/thatbeautifuldream/100xdocs/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=thatbeautifuldream/100xdocs" />
+</a>
