@@ -1,6 +1,5 @@
 {
-    "express": "Express",
-    "hospital-management": "Hospital management",
-    "postman": "Postman Basics"
+  "express": "Express",
+  "hospital-management": "Hospital management",
+  "postman": "Postman Basics"
 }
-  
