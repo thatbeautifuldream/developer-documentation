@@ -1,0 +1,95 @@
+
+
+# Introduction to JavaScript
+
+In this class, we have covered fundamental concepts related to the JavaScript.
+
+## Key Points
+
+- Computer Understand 0's and 1's
+- [High-level and Low-level language](https://www.google.com/search?q=low+level+language+and+high+level+language)
+- JavaScript is High-level programming language
+- [ECMAScript (or ES)](https://en.wikipedia.org/wiki/ECMAScript) is the standardized scripting language specification upon which JavaScript is based. JavaScript engines are the software components responsible for interpreting and executing JavaScript code. Various browsers and environments have their own JavaScript engines that implement the ECMAScript specifications. Some of the well-known JavaScript engines include: [v8](https://nodejs.org/en/learn/getting-started/the-v8-javascript-engine), [SpiderMonkey](https://spidermonkey.dev), [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore),etc.
+
+## Data Types
+
+There are two types of data Primitive and Non-Primitive.
+
+**Primitive Data Type:**
+- Number
+- String
+- Boolean
+
+**Non-Primitive Data Type:**
+- Object
+- Array
+- Function
+
+## Loop
+
+- for
+- while
+- do while
+
+
+## Examples
+
+
+```javascript
+
+/*Traversing Array*/
+
+const arr=[1,2,3,4]
+
+for(let i=0;i<arr.length;i++){
+    console.log(`Element at index ${i} is ${arr[i]}`)
+}
+
+/*Object*/
+
+const obj={
+    name:"100xDevs",
+    values:"infinity"
+}
+
+console.log(obj)
+
+/* Calling Function and Passing Function as Parameters */
+
+function sum(index1,index2){
+    return index1+index2;
+}
+function multiply(index1,index2){
+    return index1*index2;
+}
+function divide(index1,index2){
+    return index1/index2;
+}
+function Calculator(firstEl,secondEl,operation){
+    return operation(firstEl,secondEl);
+}
+
+var sumAnswer=Calculator(10,5,sum);
+var mulAnswer=Calculator(10,5,multiply);
+var divideAnswer=Calculator(10,5,divide)
+
+console.log(sumAnswer,mulAnswer,divideAnswer)
+
+/*
+Some Additional questions
+1- Write a Function which return sum between 1 to 100.
+2- Fibonacci services
+3- Stary Pattern 
+*/
+```
+
+## Core Concept
+
+- Single-threaded and Multi-threaded
+- Asynchronous and Synchronous
+- Loosely and Strongly typed
+- Interpreter and Compiler
+- Native JS and APIs
+
+
+
