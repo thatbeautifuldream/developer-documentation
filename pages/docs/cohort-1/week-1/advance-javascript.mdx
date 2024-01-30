@@ -1,0 +1,63 @@
+# Advance JavaScript
+
+In this lecture we covered about some advance concept of JavaScript such as Asynchronous nature of Js, Callbacks, Promises and arrow functions.
+
+## What does Asynchronous means.
+
+Asynchronous programming is a technique that enables your program to start a potentially long-running task and still be able to be responsive to other events while that task runs, rather than having to wait until that task has finished. Once that task has finished, your program is presented with the result.
+
+### Example
+
+```javascript
+function printToScreen(){
+    console.log("Hello World");
+}
+
+setTimeout(printToScreen,3*1000)
+
+let counter=0;
+for(let i=0;i<1000;i++){
+    counter=counter+1;
+}
+
+console.log(counter)
+```
+
+To understand <em>JavaScript Runtime</em> try out running above code on [latentflip.com](http://latentflip.com/) where you could learn more about how call stack, web api's, callback queue and event loop work together.
+
+## Promises (callback hell)
+
+```javascript
+// Basic syntax/understanding
+
+function medicine1Get(){
+    return new Promise(function(resolve){
+        setTimeout(resolve,1000)
+    })
+  }
+
+medicine1Get().then(function(){
+    console.log('Medicine 1 received')
+})
+
+// same above thing we could approach with setTimeout
+
+function medico (){
+    console.log('Medicine 1 received');
+}
+setTimeout(medico,1000);
+
+```
+
+Now here could be a question arise - then why we need promises? (google)
+
+
+## Git and Github
+
+In this secton we covered different tools to run assignments locally. To setup the tools in your machine follow there docs.
+
+1) Nodejs
+2) VsCode
+3) Git
+4) Github
+
