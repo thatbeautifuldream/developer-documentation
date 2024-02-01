@@ -1,6 +1,63 @@
-import Tree from '@/components/Tree'
+## Introduction to Express
 
-## Introduction
+## Client Server Model
+[![](https://mermaid.ink/img/pako:eNotj80KwjAQhF8lrBeFCgo9VRAUDx4UpHrMZW22Npg0dbtRRH1348-chmE-hnlAFQxBAbULt6pBFrUpdauSFsPK2ZZEDfLJ7Mjh1hNnPhytI4VdlxnqzxK6QT6djf6EGo_nz_XhsFMlXSL18lTL4Z74SjyCDDyxR2vS2uMDaJCGPGkokjVUY3SiQbevVMUoYX9vKyiEI2UQO4NCK4snRg9Fja5PKRkrgbe_B98jrzfEakTg?type=png)](https://mermaid.live/edit#pako:eNotj80KwjAQhF8lrBeFCgo9VRAUDx4UpHrMZW22Npg0dbtRRH1348-chmE-hnlAFQxBAbULt6pBFrUpdauSFsPK2ZZEDfLJ7Mjh1hNnPhytI4VdlxnqzxK6QT6djf6EGo_nz_XhsFMlXSL18lTL4Z74SjyCDDyxR2vS2uMDaJCGPGkokjVUY3SiQbevVMUoYX9vKyiEI2UQO4NCK4snRg9Fja5PKRkrgbe_B98jrzfEakTg)
+
+[![](https://mermaid.ink/img/pako:eNpNj80KwjAQhF8l7CmF9gVyENQKXgShPeayJlsNponEjUWK7278OXROyzfDMjODiZZAweDjZC6YWPStDqJoLeUGzZWCrao_EU2zEhu57_uj6Cg9KC2drVxnvlBgZ5BdDEuvlS0ynvBOS7qTB2etpwkTVVDDSGlEZ0ud-ZPSUN6NpEGV09KA2bMGHV4liplj9wwGFKdMNeSbRabW4TnhCGpAfy-UrOOYDr-J36WvNxXzSvo?type=png)](https://mermaid.live/edit#pako:eNpNj80KwjAQhF8l7CmF9gVyENQKXgShPeayJlsNponEjUWK7278OXROyzfDMjODiZZAweDjZC6YWPStDqJoLeUGzZWCrao_EU2zEhu57_uj6Cg9KC2drVxnvlBgZ5BdDEuvlS0ynvBOS7qTB2etpwkTVVDDSGlEZ0ud-ZPSUN6NpEGV09KA2bMGHV4liplj9wwGFKdMNeSbRabW4TnhCGpAfy-UrOOYDr-J36WvNxXzSvo)
+
+[![](https://mermaid.ink/img/pako:eNpVkMFqw0AMRH9l0UmGBN9NCTRxSw4NpI5724vqlWuD7U202hYT8u_dtD3UOomZhxjNFRrvGApoB__VdCRq6tJOJs0j7uv6aE4snyzZn7Zeb8wWseJL5KDm4V025sDaeZf9R3aIb9WLqXxUXhgl4mtkmfMjCY0hvx_YMzmWkG-9mxfwE2JQ0hjMLoVcWM-IjZeQZbCCkWWk3qUnrnfCgnY8soUirY5bioNasNMtoRTVn-apgUIl8gri2ZFy2dNHSgNFS0NIKrtevRx-i_np5_YNdm9aDA?type=png)](https://mermaid.live/edit#pako:eNpVkMFqw0AMRH9l0UmGBN9NCTRxSw4NpI5724vqlWuD7U202hYT8u_dtD3UOomZhxjNFRrvGApoB__VdCRq6tJOJs0j7uv6aE4snyzZn7Zeb8wWseJL5KDm4V025sDaeZf9R3aIb9WLqXxUXhgl4mtkmfMjCY0hvx_YMzmWkG-9mxfwE2JQ0hjMLoVcWM-IjZeQZbCCkWWk3qUnrnfCgnY8soUirY5bioNasNMtoRTVn-apgUIl8gri2ZFy2dNHSgNFS0NIKrtevRx-i_np5_YNdm9aDA)
+
+```javascript
+// biolerplate code
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+```javascript
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+function calculateSum(counter){
+    var sum=0;
+    for(var i=0;i<=counter;i++){
+        sum=sum+i;
+    }
+    return sum;
+}
+
+function handleFirstRequest(req,res){
+    var lastIndex=req.query.counter
+    var calculatedSum=calculateSum(lastIndex)
+    var answer="Calculated Sum is : "+calculatedSum
+    console.log(answer);
+    res.send(answer);
+}
+
+app.get('/handlesum',handleFirstRequest)
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+```
+
+```sh
+http://localhost:3000/
+http://localhost:3000/handlesum?counter=100
 
 
-- <Tree />
+```
