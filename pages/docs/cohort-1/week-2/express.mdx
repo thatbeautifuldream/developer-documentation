@@ -1,11 +1,30 @@
 ## Introduction to Express
 
+In this lecture we covered about explanation of clinent-server modal and how to write an api using NodeJs and Express.
+
 ## Client Server Model
+- Below is a diagram explaining how our client-side makes requests to the server-side, with the assistance of HTTP requests.
 [![](https://mermaid.ink/img/pako:eNotj80KwjAQhF8lrBeFCgo9VRAUDx4UpHrMZW22Npg0dbtRRH1348-chmE-hnlAFQxBAbULt6pBFrUpdauSFsPK2ZZEDfLJ7Mjh1hNnPhytI4VdlxnqzxK6QT6djf6EGo_nz_XhsFMlXSL18lTL4Z74SjyCDDyxR2vS2uMDaJCGPGkokjVUY3SiQbevVMUoYX9vKyiEI2UQO4NCK4snRg9Fja5PKRkrgbe_B98jrzfEakTg?type=png)](https://mermaid.live/edit#pako:eNotj80KwjAQhF8lrBeFCgo9VRAUDx4UpHrMZW22Npg0dbtRRH1348-chmE-hnlAFQxBAbULt6pBFrUpdauSFsPK2ZZEDfLJ7Mjh1hNnPhytI4VdlxnqzxK6QT6djf6EGo_nz_XhsFMlXSL18lTL4Z74SjyCDDyxR2vS2uMDaJCGPGkokjVUY3SiQbevVMUoYX9vKyiEI2UQO4NCK4snRg9Fja5PKRkrgbe_B98jrzfEakTg)
 
+- Below is a diagram that illustrates the four main breakdowns of the backend.
 [![](https://mermaid.ink/img/pako:eNpNj80KwjAQhF8l7CmF9gVyENQKXgShPeayJlsNponEjUWK7278OXROyzfDMjODiZZAweDjZC6YWPStDqJoLeUGzZWCrao_EU2zEhu57_uj6Cg9KC2drVxnvlBgZ5BdDEuvlS0ynvBOS7qTB2etpwkTVVDDSGlEZ0ud-ZPSUN6NpEGV09KA2bMGHV4liplj9wwGFKdMNeSbRabW4TnhCGpAfy-UrOOYDr-J36WvNxXzSvo?type=png)](https://mermaid.live/edit#pako:eNpNj80KwjAQhF8l7CmF9gVyENQKXgShPeayJlsNponEjUWK7278OXROyzfDMjODiZZAweDjZC6YWPStDqJoLeUGzZWCrao_EU2zEhu57_uj6Cg9KC2drVxnvlBgZ5BdDEuvlS0ynvBOS7qTB2etpwkTVVDDSGlEZ0ud-ZPSUN6NpEGV09KA2bMGHV4liplj9wwGFKdMNeSbRabW4TnhCGpAfy-UrOOYDr-J36WvNxXzSvo)
-
+-  Below is a diagram that illustrates the five main breakdowns of the HTTP Server.
 [![](https://mermaid.ink/img/pako:eNpVkMFqw0AMRH9l0UmGBN9NCTRxSw4NpI5724vqlWuD7U202hYT8u_dtD3UOomZhxjNFRrvGApoB__VdCRq6tJOJs0j7uv6aE4snyzZn7Zeb8wWseJL5KDm4V025sDaeZf9R3aIb9WLqXxUXhgl4mtkmfMjCY0hvx_YMzmWkG-9mxfwE2JQ0hjMLoVcWM-IjZeQZbCCkWWk3qUnrnfCgnY8soUirY5bioNasNMtoRTVn-apgUIl8gri2ZFy2dNHSgNFS0NIKrtevRx-i_np5_YNdm9aDA?type=png)](https://mermaid.live/edit#pako:eNpVkMFqw0AMRH9l0UmGBN9NCTRxSw4NpI5724vqlWuD7U202hYT8u_dtD3UOomZhxjNFRrvGApoB__VdCRq6tJOJs0j7uv6aE4snyzZn7Zeb8wWseJL5KDm4V025sDaeZf9R3aIb9WLqXxUXhgl4mtkmfMjCY0hvx_YMzmWkG-9mxfwE2JQ0hjMLoVcWM-IjZeQZbCCkWWk3qUnrnfCgnY8soUirY5bioNasNMtoRTVn-apgUIl8gri2ZFy2dNHSgNFS0NIKrtevRx-i_np5_YNdm9aDA)
+
+## How to write an API.
+
+- <b>Step 1-</b> Open terminal in Vs Code write below command to initialize your Node.js Project.
+  ```sh
+  npm init -y
+  ```
+  and hit enter, there will be package.json file will be created inside your folder.
+- <i>if there is any error-google it.</i>
+
+- <b>Step 2-</b> Install express by running this command on terminal:
+```sh
+npm i express
+```
+- <b>Step 3-</b> Create an Index.js file in root directory and paste the below code.
 
 ```javascript
 // biolerplate code
@@ -21,6 +40,18 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 ```
+- <b>step 4</b> run your server using below command in your terminal.
+
+```
+node index
+```
+## Request Method, URL Route and Query/Params/Headers/Body
+
+- In Below code there is 2 route created in which -
+
+ route 1 - ```\``` which is just prinitng a statement.
+
+ route 2- ```\handleSum``` which is taking input in query parameter ``` ?counter=10 ``` and returning sum from 0 to that number.
 
 ```javascript
 const express = require('express')
@@ -54,6 +85,7 @@ app.listen(port, () => {
 })
 
 ```
+- On running above code we will having below 2 route.
 
 ```sh
 http://localhost:3000/
@@ -61,3 +93,7 @@ http://localhost:3000/handlesum?counter=100
 
 
 ```
+
+- url - ```http://localhost:3000/``` and ```http://localhost:3000/handlesum?counter=100```
+- route - ```/``` and ```/handlesum```
+- method - Get
