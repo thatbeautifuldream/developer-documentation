@@ -86,3 +86,245 @@ Express is a routing and middleware web framework that has minimal functionality
 - Call the next middleware function in the stack
 
 ## Example
+
+- code
+
+```sh
+const express = require("express");
+const app = express();
+const port = 3000;
+
+function middleware1(req,res,next){
+  console.log("from inside middleware" + req.headers.counter)
+  next();
+}
+app.use(middleware1);
+
+
+function calculateSum(counter) {
+  var sum = 0;
+  for (var i = 0; i <= counter; i++) {
+    sum = sum + i;
+  }
+  return sum;
+}
+
+
+function handleFirstRequest(req, res) {
+  /* console.log(req.query);
+     var lastIndex = req.query.counter;*/
+     console.log(req.headers);
+     var lastIndex = req.headers.counter;
+  // console.log(req.body);
+  // var lastIndex = req.body.counter;
+  console.log(lastIndex);
+  var calculatedSum = calculateSum(lastIndex);
+  var answer = "Calculated Sum is : " + calculatedSum;
+  console.log(answer);
+  res.send(answer);
+}
+
+app.get("/handlesum", handleFirstRequest);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+
+```
+
+- Terminal Output
+
+```
+from inside middleware10
+{
+  counter: '10',
+  'content-type': 'application/json',
+  'user-agent': 'PostmanRuntime/7.36.1',
+  accept: '*/*',
+  'postman-token': 'f10c8d3f-b60e-4929-887f-269529503dc3',
+  host: 'localhost:3000',
+  'accept-encoding': 'gzip, deflate, br',
+  connection: 'keep-alive',
+  'content-length': '22'
+}
+10
+Calculated Sum is : 55
+```
+
+## Again Sending data through body using middleware
+
+- Step-1 Add dependency of middleware in express.
+
+```
+npm i body-parser
+```
+
+- step-2 write below code in index.js file using middleware
+
+```javascript
+const express = require("express");
+const app = express();
+const bodyParser=require("body-parser") //importing middleware
+const port = 3000;
+
+
+app.use(bodyParser.json()) // middleware
+
+
+
+function calculateSum(counter) {
+  var sum = 0;
+  for (var i = 0; i <= counter; i++) {
+    sum = sum + i;
+  }
+  return sum;
+}
+
+
+function handleFirstRequest(req, res) {
+  /* console.log(req.query);
+     var lastIndex = req.query.counter;*/
+    //  console.log(req.headers);
+    //  var lastIndex = req.headers.counter;
+  console.log(req.body);
+  var lastIndex = req.body.counter;
+  console.log(lastIndex);
+  var calculatedSum = calculateSum(lastIndex);
+  var answer = "Calculated Sum is : " + calculatedSum;
+  console.log(answer);
+  res.send(answer);
+}
+
+app.get("/handlesum", handleFirstRequest);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+```
+
+- step-3 ```node index.js```
+
+- Output
+
+```Calculated Sum is : 55```
+
+## Status code
+
+### HTTP response status codes.
+
+HTTP response status code indicate whether a specific <u><b>HTTP</b></u> request has been successfully completed. Response are grouped in five classes.
+
+1. Information response (100-199)
+2. Successful response (200-299)
+3. Redirecting message (300-399)
+4. Client Error Response (400-499)
+5. Server Error Response (500-599)
+
+```sh
+
+function handleFirstRequest(req,res){
+  var counter =req.headers.counter;
+  if(counnter<10000){
+    var calculateSum=calculatedSum(counter);
+    var answer="the sum is"+ calculateSum;
+    res.status(200).send(answer) // .status(200) is used
+  }
+  else{
+    res.status(411).send("Cannot solve large amount. Please Use Others server") // .status(411) is used
+  }
+}
+
+```
+
+## Response Body Type
+
+Till now we were sending Text.
+
+- JSON body
+
+```
+var answerObject={
+  Sum:calculatedSum
+}
+res.status(200).send(answerObject);
+```
+ OR
+
+ ```
+ var answerObject={
+  Sum:calculatedSum
+}
+res.status(200).json(answerObject);
+```
+
+- HTML body
+
+```
+res.send("<head><title>Hello from Page</title></head><body><i>hi there</i></body")
+```
+
+- Sending file
+
+```
+res.ssend(__dirname_ +'./index.html')
+```
+
+## Server can talk to server
+
+[![](https://mermaid.ink/img/pako:eNotTk0LgzAU-yvlnSoou5chbOy4wZjXXp72OR22ldd2MsT_vu4jpyQkJCt03hAo6Ce_dANyFOebdiLjIGXLfgnE5b7lXS1mH6JF91cu9x5BXNl3FEJR_EuiqmpxlLIhfhIXBZRgiS2OJo-sn5CGOJAlDSpTQz2mKWrQbstRTNE3L9eBipyohDQbjHQa8c5oQfU4heySGaPny-_49__2Bg25QQg?type=png)](https://mermaid.live/edit#pako:eNotTk0LgzAU-yvlnSoou5chbOy4wZjXXp72OR22ldd2MsT_vu4jpyQkJCt03hAo6Ce_dANyFOebdiLjIGXLfgnE5b7lXS1mH6JF91cu9x5BXNl3FEJR_EuiqmpxlLIhfhIXBZRgiS2OJo-sn5CGOJAlDSpTQz2mKWrQbstRTNE3L9eBipyohDQbjHQa8c5oQfU4heySGaPny-_49__2Bg25QQg)
+
+
+## Example
+
+step-1 Create index.js and run below code using ```node index.js```
+```
+const express = require("express");
+const app = express();
+const port = 3000;
+
+
+function calculateSum(counter) {
+  var sum = 0;
+  for (var i = 0; i <= counter; i++) {
+    sum = sum + i;
+  }
+  return sum;
+}
+
+
+function handleFirstRequest(req, res) {
+  console.log(req.query);
+  var lastIndex = req.query.counter;
+  console.log(lastIndex);
+  var calculatedSum = calculateSum(lastIndex);
+  var answer = "Calculated Sum is : " + calculatedSum;
+  console.log(answer);
+  res.send(answer);
+}
+
+app.get("/handlesum", handleFirstRequest);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+```
+Step-2 Create new file ```responseServer.js``` and run below code using ```node responseServer.js```
+
+```javascript
+function logResponse(jsonBody) {
+    console.log(jsonBody);
+}
+
+function callbackFn(result) {
+    result.json().then(logResponse)
+}
+
+var sendObj = {
+    method: "GET"
+};
+
+fetch("http://localhost:3000/handlesum?counter=10", sendObj).then(callbackFn)
+
+```
