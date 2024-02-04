@@ -1,0 +1,88 @@
+## Advance Express Concept
+
+In this lecture we covered the light green highlighted portion from below diagram.
+[![](https://mermaid.ink/img/pako:eNp1Uc9rgzAU_ldCdonQkl4bRmFTtzLq6tTCDl5S81wFNV3ysiGl__uiQncYuz2-X3zvvQuttAIqaN3q7-okDZIiKnvywLZFkZIczBeYYASWyw15ZCyDTwcWSQJ40iq4USFjh2zHSaYdAk-1wV8uYuzNgRl4Ko3s7P3R8A3fglRgLD9qNQSBEMLqDqpWWuttsy9mLEeJzpLQl_wjmjRPYyV71r0Fvi2SHZ_TX_L9Ky_i9-Kf6GfGwn2Wjx0nIoKa3FSkbtpW3K1Xcbxe0QXtwHSyUf5KlzGgpHiCDkoq_Kiglq7Fkpb91UulQ50PfUUFGgcL6s5KIkSN_PCbU1HL1noUVIPaJPPlpwdcfwCcJX0Z?type=png)](https://mermaid.live/edit#pako:eNp1Uc9rgzAU_ldCdonQkl4bRmFTtzLq6tTCDl5S81wFNV3ysiGl__uiQncYuz2-X3zvvQuttAIqaN3q7-okDZIiKnvywLZFkZIczBeYYASWyw15ZCyDTwcWSQJ40iq4USFjh2zHSaYdAk-1wV8uYuzNgRl4Ko3s7P3R8A3fglRgLD9qNQSBEMLqDqpWWuttsy9mLEeJzpLQl_wjmjRPYyV71r0Fvi2SHZ_TX_L9Ky_i9-Kf6GfGwn2Wjx0nIoKa3FSkbtpW3K1Xcbxe0QXtwHSyUf5KlzGgpHiCDkoq_Kiglq7Fkpb91UulQ50PfUUFGgcL6s5KIkSN_PCbU1HL1noUVIPaJPPlpwdcfwCcJX0Z)
+
+Till last section we seen that how to pass data through params in this section we will see how to send data through headers & body, middleware , status code  and response type.
+
+## Data through headers
+
+- step-1 Add the below line inside your route to use the headers value. 
+
+```
+/* var lastIndex=req.query.counter */
+    console.log(req.headers) // logging header
+    var lastIndex=req.headers.counter // getting counter value which passed through headers
+```
+
+- step-2 Now run the code using ```node index``` and pass value into headers using Postman.
+
+<i> if there is any error please google it.</i>
+
+- Log of above code
+```sh
+{
+  counter: '10',
+  'user-agent': 'PostmanRuntime/7.36.1',
+  accept: '*/*',
+  'postman-token': 'b24f77d1-78b8-4e74-a4c9-9e682462d449',
+  host: 'localhost:3000',
+  'accept-encoding': 'gzip, deflate, br',
+  connection: 'keep-alive'
+}
+```
+
+- Response
+```
+Calculated Sum is : 55
+```
+
+
+
+
+## Data through body
+
+- step- 1 add the below code into your route to use the body value
+
+```
+  console.log(req.body);
+  var lastIndex = req.body.counter;
+  console.log(lastIndex);
+```
+
+and send below body through Postman.
+
+```
+{
+    "counter":10
+}
+
+```
+
+
+and you will see below error after hitting the send button.
+
+```
+undefined
+TypeError: Cannot read properties of undefined (reading 'counter')
+```
+
+from here middleware came into the picture.
+
+## Middleware
+
+[![](https://mermaid.ink/img/pako:eNoljbsKg0AURH9Fro2CiVGsNFiElClCUmZTXN3rA9xd2UckiP-eDU4zA2eGWaFVnKCEblJLO6C2we3BZODVZlF00WoxpNNzo9P6rowVKOP4cKgxjyKc52NPNixOVVhkVRzvO-OaXuM8BCOnLHj5-Yf0e2eY706SMwkJCNICR-7_1z9gYAcSxKD0kVOHbrIMmNx8FZ1Vz69sobTaUQJu5mjpOqI_E1B2OBnafh0yQiE?type=png)](https://mermaid.live/edit#pako:eNoljbsKg0AURH9Fro2CiVGsNFiElClCUmZTXN3rA9xd2UckiP-eDU4zA2eGWaFVnKCEblJLO6C2we3BZODVZlF00WoxpNNzo9P6rowVKOP4cKgxjyKc52NPNixOVVhkVRzvO-OaXuM8BCOnLHj5-Yf0e2eY706SMwkJCNICR-7_1z9gYAcSxKD0kVOHbrIMmNx8FZ1Vz69sobTaUQJu5mjpOqI_E1B2OBnafh0yQiE) [![](https://mermaid.ink/img/pako:eNo1jsEKgkAURX9FnpsRKrNaWbiIli2ilk2Lp_NMwZmR50wS0r83Id3VhXsPnAkqqwhyqDs7Vg2yi85XaaKQKhPiyHYciNNDyWlxsYPTaJJkuSxwI4RulepoRKYkmZHBl0_GvolaRVl0D-SL-DFvuPlhWyGw71dPcvFuvY932f7PklHSwAI0scZWBaXpN0hwDWmSkIeqqEbfOQnSfMIVvbO3t6kgd-xpAb5X6OjUYpDQkNfYDfT5AmXoSA0?type=png)](https://mermaid.live/edit#pako:eNo1jsEKgkAURX9FnpsRKrNaWbiIli2ilk2Lp_NMwZmR50wS0r83Id3VhXsPnAkqqwhyqDs7Vg2yi85XaaKQKhPiyHYciNNDyWlxsYPTaJJkuSxwI4RulepoRKYkmZHBl0_GvolaRVl0D-SL-DFvuPlhWyGw71dPcvFuvY932f7PklHSwAI0scZWBaXpN0hwDWmSkIeqqEbfOQnSfMIVvbO3t6kgd-xpAb5X6OjUYpDQkNfYDfT5AmXoSA0)
+
+
+Express is a routing and middleware web framework that has minimal functionality of its own. An Express application is essentally a series of middleware function calls.
+
+- Middleware functions are function that have access to the request object(req), the response objeect(res) and the next middleware function in the applications request-response cycle. The next middleware function is commonly denoted by a variable named next.
+
+## Middlleware function can perform the following task.
+
+- Execute any code.
+- Make changes to the request and the response objects.
+- End the request /response cycle.
+- Call the next middleware function in the stack
+
+## Example
