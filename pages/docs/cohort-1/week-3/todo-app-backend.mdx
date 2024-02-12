@@ -1,0 +1,171 @@
+
+## Creating Todo app backend
+
+In this lecture we covered creating backend of todo app.
+
+## Steps to Create todo app.
+
+- step 1 :
+Create a folder for project and open it in your terminal and initialize npm using below command.
+
+```
+npm init -y
+```
+
+- step 2: Install Express, Cors and body-parser.
+
+```
+npm i express cors body-parser
+```
+
+- step 3: Write below express template code to check your installation.
+
+```
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+and then
+
+```
+node index
+```
+
+- step 4: Create a todos.json file with below data.
+
+```
+[
+  {
+    "id":598669,
+    "title":"cohort 2",
+    "description":"100x devs"
+   }
+]
+```
+
+- step 5: Creating a get route to read above data from file.
+
+```
+app.get('/todos', (req, res) => {
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
+  });
+});
+```
+
+- step 6: Creating a route to get todo by id.
+
+```
+function findIndex(arr, id) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === id) return i;
+  }
+  return -1;
+}
+
+
+app.get('/todos/:id', (req, res) => {
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    const todos = JSON.parse(data);
+    const todoIndex = findIndex(todos, parseInt(req.params.id));
+    if (todoIndex === -1) {
+      res.status(404).send();
+    } else {
+      res.json(todos[todoIndex]);
+    }
+  });
+});
+
+```
+
+- step 7: Creating a post route to add todo.
+
+```
+app.post('/todos', (req, res) => {
+  const newTodo = {
+    id: Math.floor(Math.random() * 1000000), // unique random id
+    title: req.body.title,
+    description: req.body.description
+  };
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    const todos = JSON.parse(data);
+    console.log(todos)
+    todos.push(newTodo);
+    fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
+      if (err) throw err;
+      res.status(201).json(newTodo);
+    });
+  });
+});
+```
+- step 8: Creating a put route to edit todo.
+
+```
+app.put('/todos/:id', (req, res) => {
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    const todos = JSON.parse(data);
+    const todoIndex = findIndex(todos, parseInt(req.params.id)); // earlier created this function
+    if (todoIndex === -1) {
+      res.status(404).send();
+    } else {
+      const updatedTodo = {
+        id: todos[todoIndex].id,
+        title: req.body.title,
+        description: req.body.description
+      };
+      todos[todoIndex] = updatedTodo;
+      fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
+        if (err) throw err;
+        res.status(200).json(updatedTodo);
+      });
+    }
+  });
+});
+```
+
+- step 9: Creating a route to delete todo.
+
+```
+function removeAtIndex(arr, index) {
+  let newArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (i !== index) newArray.push(arr[i]);
+  }
+  return newArray;
+}
+
+app.delete('/todos/:id', (req, res) => {
+
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    const todos = JSON.parse(data);
+    const todoIndex = findIndex(todos, parseInt(req.params.id));
+    if (todoIndex === -1) {
+      res.status(404).send();
+    } else {
+      todos = removeAtIndex(todos, todoIndex);
+      fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
+        if (err) throw err;
+        res.status(200).send();
+      });
+    }
+  });
+});
+```
+
+## Conclusion
+
+In this Section we had created main 4 route (i.e GET, POST, PUT and DELETE) to perform crud operation in our todo app. 
