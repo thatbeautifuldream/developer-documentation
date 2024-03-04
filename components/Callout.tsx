@@ -40,7 +40,7 @@ export default function Callout({ children, type = "default", icon }) {
 
   return (
     <div
-      className={`${theme.classes} flex rounded-lg callout mt-6 overflow-scroll`}
+      className={`${theme.classes} flex rounded-lg callout mt-6 overflow-auto`}
     >
       <div
         className="py-2 pl-3 pr-2 text-xl select-none"
